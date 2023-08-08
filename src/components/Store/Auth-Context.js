@@ -14,11 +14,13 @@ const AuthContext=React.createContext({
     const userIsLoggedn=!!token;
 
     const logingHandler=(token)=>{
+        localStorage.setItem("token",token)
         SetToken(token)
     }
 
     const longoutHandler=()=>{
         SetToken(null)
+        localStorage.removeItem('token')
     }
 
     const ContextValue={

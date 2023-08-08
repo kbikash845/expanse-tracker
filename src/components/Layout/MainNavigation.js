@@ -26,7 +26,7 @@ const MainNavigation = () => {
           )}
          {isloggedin && (
            <li>
-           <Link to='/profile'>Profile</Link>
+           <Link to='/profile'> Update Profile</Link>
          </li>
           )}
           {isloggedin && (
