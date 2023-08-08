@@ -16,7 +16,7 @@
   border-radius: 12px;
 }
 
-input[type=text],input[type=email],input[type=number],textarea {
+#fname,textarea {
   width: 80%;
   padding: 12px 20px;
   margin: 8px 0;
