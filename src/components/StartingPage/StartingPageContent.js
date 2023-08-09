@@ -115,12 +115,12 @@ const StartingPageContent = () => {
     <div className="container">
     <form onSubmit={submitHandler}>
       <div className="form-control">
-        <label>Title</label>
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+        <label> Expanse-title:-</label>
+        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}  required/>
       </div>
       <div className="form-control">
-        <label>Amount</label>
-        <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} />
+        <label>Amount:-</label>
+        <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} required />
       </div>
       <div className="form-control">
         <label>Description</label>
@@ -128,15 +128,17 @@ const StartingPageContent = () => {
       </div>
       <div className="form-control">
         <label>Category</label>
-        <select value={category} onChange={(e) => setCategory(e.target.value)}>
+        <select value={category} onChange={(e) => setCategory(e.target.value)} required>
           <option value="">Select Category</option>
           <option value="salary">Salary</option>
           <option value="petrol">Petrol</option>
           <option value="diesel">Diesel</option>
+          <option value="vegetable">vegetables</option>
+          <option value="grocery">grocery</option>
         </select>
       </div>
       <div className="form-actions">
-        <button type="submit">Submit</button>
+        <button type="submit" className='btnsubmit'>Submit</button>
       </div>
     </form>
     </div>

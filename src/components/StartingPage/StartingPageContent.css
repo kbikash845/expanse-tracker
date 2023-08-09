@@ -39,11 +39,32 @@
   button:hover {
     background-color: #0056b3;
   }
+
+  .btnsubmit{
+    width: 40%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 10px;
+    /* margin: 8px 0; */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 20px;
+  }
   
   /* Media Query for Mobile Devices */
 @media (max-width: 600px) {
     .container {
       margin: 20px auto; /* Adjust margin for smaller screens */
       padding: 1rem; /* Reduce padding for smaller screens */
+    }
+  }
+  @media (max-width: 600px) {
+    input,
+  textarea,
+  select {
+      width: 80%; /* Adjust margin for smaller screens */
+       /* Reduce padding for smaller screens */
     }
   }

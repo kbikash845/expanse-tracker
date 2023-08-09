@@ -1,7 +1,7 @@
 .details-container {
-    max-width: 700px;
+    max-width: 720px;
     margin: 40px auto;
-    padding: 1.5rem;
+    padding: 0.5rem;
     background-color: #f7f7f7;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -18,14 +18,18 @@
   
   .detail-label {
     font-weight: bold;
-    margin-right: 1rem;
+    margin-right:0.5rem;
   }
   
   .detail-value {
     flex-grow: 1;
-    margin-right: 1rem;
+    margin-right: 0.4rem;
+    font-size: 18px;
+    /* color: aliceblue; */
+    font-weight: 400;
   }
   
   .detail-list{
     list-style-type: none;
   }
+ 
