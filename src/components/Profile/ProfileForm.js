@@ -35,7 +35,7 @@ const ProfileForm = () => {
 
       }
       try {
-          const response = await fetch("https://expanse-tracker-app-943b9-default-rtdb.firebaseio.com/contactus.json", {
+          const response = await fetch("https://expanse-tracker-app-f33f0-default-rtdb.firebaseio.com/contactus.json", {
             method: "POST",
             body: JSON.stringify(contactData),
             headers: {
