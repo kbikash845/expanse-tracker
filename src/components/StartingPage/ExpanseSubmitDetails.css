@@ -1,0 +1,31 @@
+.details-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 1.5rem;
+    background-color: #f7f7f7;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    
+  }
+  
+  .detail-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+   
+  }
+  
+  .detail-label {
+    font-weight: bold;
+    margin-right: 1rem;
+  }
+  
+  .detail-value {
+    flex-grow: 1;
+    margin-right: 1rem;
+  }
+  
+  .detail-list{
+    list-style-type: none;
+  }

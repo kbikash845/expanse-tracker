@@ -1,0 +1,49 @@
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 1.5rem;
+    background-color: #f7f7f7;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .form-control {
+    margin-bottom: 1rem;
+  }
+  
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Media Query for Mobile Devices */
+@media (max-width: 600px) {
+    .container {
+      margin: 20px auto; /* Adjust margin for smaller screens */
+      padding: 1rem; /* Reduce padding for smaller screens */
+    }
+  }
