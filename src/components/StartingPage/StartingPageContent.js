@@ -64,6 +64,52 @@ const StartingPageContent = () => {
     
   };
 
+
+  const deleteExpense = (id) => {
+    fetch(`https://expanse-tracker-app-f33f0-default-rtdb.firebaseio.com/expense/${id}.json`, {
+      method: 'DELETE',
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log('Expense successfully deleted');
+          setSubmittedData((preItems) => preItems.filter((expense) => expense.id !== id));
+        } else {
+          throw new Error('Failed to delete expense');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
+  //Edit the expense
+  const editExpense=(id)=>{
+    //Find the expense proper id
+    const editItem=submittedData.find((expense)=> expense.id === id)
+
+    //populating the selected expense
+    if(editItem){
+       setTitle(editItem.title)
+        setAmount(editItem.amount);
+        setDescription(editItem.description);
+        setCategory(editItem.category)
+    }
+    fetch(`https://expanse-tracker-app-f33f0-default-rtdb.firebaseio.com/expense/${id}.json`, {
+        method: 'DELETE',
+      }).then((response) => {
+        if (response.ok) {
+          console.log('Expense successfully deleted from database & its populate successfully!');
+          setSubmittedData((prevExpenses) => prevExpenses.filter((expense) => expense.id !== id));
+        } else {
+          throw new Error('Failed to delete expense');
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
   return (
     <>
     <div className="container">
@@ -95,7 +141,10 @@ const StartingPageContent = () => {
     </form>
     </div>
     {submittedData.map((item, index) => (
-        <ExpanseSubmitDetails key={index} expenseData={item} />
+        <ExpanseSubmitDetails key={index} expenseData={item}
+        onEdit={() => editExpense(item.id)}
+        onDelete={() => deleteExpense(item.id)}
+        />
       ))}
     </>
   );

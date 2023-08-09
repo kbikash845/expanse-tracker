@@ -2,7 +2,9 @@ import React from 'react'
 import './ExpanseSubmitDetails.css'
 
 
-function ExpanseSubmitDetails({expenseData}) {
+function ExpanseSubmitDetails({expenseData,onDelete, onEdit}) {
+
+    
     return (
         <div className="details-container">
       {/* <h2>Expense Details</h2> */}
@@ -20,9 +22,8 @@ function ExpanseSubmitDetails({expenseData}) {
           <span className="detail-label">Description:</span>
           <span className="detail-value">{expenseData.description}</span>
         
-        
-          <span className="detail-label">Category:</span>
-          <span className="detail-value">{expenseData.category}</span>
+          <span className="detail-value"><button onClick={onEdit}>Edit</button></span>
+          <span className="detail-value"><button onClick={onDelete}>Delete</button></span>
         </li>
       </ul>
     </div>
