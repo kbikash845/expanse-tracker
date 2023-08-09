@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './StartingPageContent.css'
 import ExpanseSubmitDetails from './ExpanseSubmitDetails';
 
@@ -10,7 +10,21 @@ const StartingPageContent = () => {
   const [category, setCategory] = useState('');
   const [submittedData, setSubmittedData] = useState([]);
 
-  const submitHandler = (event) => {
+   // Load submitted data from localStorage on component mount
+   useEffect(() => {
+    const storedData = localStorage.getItem('submittedData'); 
+    if (storedData) {
+      setSubmittedData(JSON.parse(storedData));
+    }
+  }, []);
+
+  // Save submitted data to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('submittedData', JSON.stringify(submittedData));
+  }, [submittedData]);
+
+
+  const submitHandler = async(event) => {
     event.preventDefault();
 
     const expenseData = {
@@ -20,15 +34,34 @@ const StartingPageContent = () => {
       category,
     };
 
+    try{
+      const Response=await fetch("https://expanse-tracker-app-f33f0-default-rtdb.firebaseio.com/expanse.json",
+      {
+       method:"post",
+       body:JSON.stringify(expenseData),
+       headers:{
+        "Content-Type": "application/json",
+       },
+      });
+      if(!Response.ok){
+        throw new Error("Failed to store data to firebase")
+      }
+      const data=await Response.json();
+      console.log(data);
+      setSubmittedData((preItems)=> [...preItems, { ...expenseData, id: data.name }]);
+      setTitle('');
+        setAmount('');
+      setDescription('');
+      setCategory('');
+    }catch (error) {
+      console.error("Error:", error);
+    }
 
     // You can now send expenseData to your backend or handle it as needed
-    console.log(expenseData);
-    setSubmittedData((preItems)=> [preItems,expenseData]);
+    
+    
     // Clear the form after submission
-    setTitle('');
-    setAmount('');
-    setDescription('');
-    setCategory('');
+    
   };
 
   return (
