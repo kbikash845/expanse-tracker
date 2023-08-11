@@ -8,7 +8,8 @@ const StartingPageContent = () => {
    const dispatch=useDispatch()
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState('');
-  const [description, setDescription] = useState('');
+  // const [description, setDescription] = useState('');
+  const[Enterdate,setDate]= useState('')
   const [category, setCategory] = useState('');
   const [submittedData, setSubmittedData] = useState([]);
 
@@ -32,7 +33,7 @@ const StartingPageContent = () => {
     const expenseData = {
       title,
       amount: +amount, // Convert amount to a number
-      description,
+      date:new Date(Enterdate).toISOString(),
       category,
     };
 
@@ -53,7 +54,7 @@ const StartingPageContent = () => {
       setSubmittedData((preItems)=> [...preItems, { ...expenseData, id: data.name }]);
       setTitle('');
         setAmount('');
-      setDescription('');
+      setDate('');
       setCategory('');
     }catch (error) {
       console.error("Error:", error);
@@ -94,7 +95,7 @@ const StartingPageContent = () => {
     if(editItem){
        setTitle(editItem.title)
         setAmount(editItem.amount);
-        setDescription(editItem.description);
+        setDate(editItem.date);
         setCategory(editItem.category)
     }
     fetch(`https://expanse-tracker-app-f33f0-default-rtdb.firebaseio.com/expense/${id}.json`, {
@@ -134,7 +135,7 @@ const StartingPageContent = () => {
       </div>
       <div className="form-control">
         <label>Description</label>
-        <textarea rows="4" value={description} onChange={(e) => setDescription(e.target.value)} />
+        <input type='date' min="2019-01-01" max="2024-01-01"  value={Enterdate} onChange={(e) => setDate(e.target.value)} />
       </div>
       <div className="form-control">
         <label>Category</label>
@@ -153,12 +154,15 @@ const StartingPageContent = () => {
       </div>
     </form>
     </div>
+    <div className='mains'>
+    <h2 style={{textAlign:"center",textDecoration:"underline"}}>Expense Details</h2>
     {submittedData.map((item, index) => (
         <ExpanseSubmitDetails key={index} expenseData={item}
         onEdit={() => editExpense(item.id)}
         onDelete={() => deleteExpense(item.id)}
-        />
+         />
       ))}
+      </div>
     </>
   );
 };
