@@ -3,12 +3,16 @@ import { useState, useRef, useContext } from 'react';
 import classes from './AuthForm.module.css';
 import AuthContext from '../Store/Auth-Context';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authAction } from '../Store/auth';
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setLoading] = useState(false);
 
-  const authCtx = useContext(AuthContext);
+  const dispatch=useDispatch()
+
+  // const authCtx = useContext(AuthContext);
   const navigate = useNavigate();
 
   const emailInputRef = useRef();
@@ -63,7 +67,9 @@ const AuthForm = () => {
       })
       .then((data) => {
         console.log(data);
-        authCtx.login(data.idToken);
+        // authCtx.login(data.idToken);
+        
+      dispatch(authAction.login(data.idToken))
         navigate('/');
       })
       .catch((err) => {

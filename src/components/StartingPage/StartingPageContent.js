@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import './StartingPageContent.css'
 import ExpanseSubmitDetails from './ExpanseSubmitDetails';
+import { useDispatch } from 'react-redux';
+import { authAction } from '../Store/auth';
 
 const StartingPageContent = () => {
-  
+   const dispatch=useDispatch()
   const [title, setTitle] = useState('');
   const [amount, setAmount] = useState('');
   const [description, setDescription] = useState('');
@@ -109,7 +111,15 @@ const StartingPageContent = () => {
         console.log(error);
       });
   }
-
+  
+  
+  const sum = submittedData.reduce(
+    (total, expense) => total + parseInt(expense.amount),
+    0
+  );
+  if(sum){
+    dispatch(authAction.ispremium(sum))
+  }
   return (
     <>
     <div className="container">
@@ -139,6 +149,7 @@ const StartingPageContent = () => {
       </div>
       <div className="form-actions">
         <button type="submit" className='btnsubmit'>Submit</button>
+        <h2>Total Amount:={sum} </h2>
       </div>
     </form>
     </div>

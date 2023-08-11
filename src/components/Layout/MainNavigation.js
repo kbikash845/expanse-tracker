@@ -1,16 +1,22 @@
 import { Link } from 'react-router-dom';
 
 import classes from './MainNavigation.module.css';
-import { useContext } from 'react';
-import AuthContext from '../Store/Auth-Context';
+// import { useContext } from 'react';
+// import AuthContext from '../Store/Auth-Context';
+import { useDispatch, useSelector } from 'react-redux';
+import { authAction } from '../Store/auth';
 
 const MainNavigation = () => {
-  const authCtx=useContext(AuthContext)
 
-  const isloggedin=authCtx.isLonggedIn
+  const dispatch=useDispatch()
+  // const authCtx=useContext(AuthContext)
+ const isAuth=useSelector(state=>state.auth.isAuthentication)
+  // const isloggedin=authCtx.isLonggedIn
+
+  const ispremium=useSelector(state=>state.auth.ispremium)
 
   const longoutHandler=()=>{
-    authCtx.lonout();
+  dispatch(authAction.lonout())
   }
   return (
     <header className={classes.header}>
@@ -19,17 +25,22 @@ const MainNavigation = () => {
       </Link>
       <nav>
         <ul>
-          {!isloggedin && (
+          {!isAuth&& (
             <li>
             <Link to='/auth'>Login</Link>
           </li>
           )}
-         {isloggedin && (
+         {ispremium && (
+           <li>
+           <Link to='/profile'> Premium</Link>
+         </li>
+          )}
+          {isAuth && (
            <li>
            <Link to='/profile'> Update Profile</Link>
          </li>
           )}
-          {isloggedin && (
+          {isAuth && (
              <li>
              <button onClick={longoutHandler}>Logout</button>
            </li>
