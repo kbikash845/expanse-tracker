@@ -2,7 +2,7 @@ import { useState, useRef, useContext } from 'react';
 
 import classes from './AuthForm.module.css';
 import AuthContext from '../Store/Auth-Context';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authAction } from '../Store/auth';
 
@@ -66,11 +66,13 @@ const AuthForm = () => {
         }
       })
       .then((data) => {
-        console.log(data);
+        console.log("data",data);
         // authCtx.login(data.idToken);
+        // localStorage.setItem("userId",JSON.parse(data))
         
       dispatch(authAction.login(data.idToken))
-        navigate('/');
+      localStorage.setItem("token", data.idToken);
+        navigate('/dashboard');
       })
       .catch((err) => {
         alert(err.message);
@@ -96,11 +98,13 @@ const AuthForm = () => {
           </div>
         )}
         <div>
-          <button style={{ padding: '8px' }}>{isLogin ? 'Login' : 'Create Account'}</button>
+          <button className={classes.islogin}>{isLogin ? 'Login' : 'Create Account'}</button>
           {isLoading && <p>send request</p>}
           
         </div>
-        <Link className={classes.forgot} to="/forgotpassword">Forgot Password ?</Link>
+        <div >
+        <NavLink className={classes.forgot} to="/forgotpassword">Forgot Password ?</NavLink>
+        </div>
         <div className={classes.actions}>
           <button type='button' className={classes.toggle} onClick={switchAuthModeHandler}>
             {isLogin ? 'Create new account' : 'Login with existing account'}

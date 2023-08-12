@@ -82,7 +82,7 @@ return (
        <input type="text" id="URLname" value={URLNumber} placeholder="Url.." onChange={TextChangedHandler} required/>
     </div>
     <div>
-       <input type="submit" value="Submit"/>
+       <input type="submit" value="Submit" className={classes.submits}/>
     </div>
   </form>
 </div>

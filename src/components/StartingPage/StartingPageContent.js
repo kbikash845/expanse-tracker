@@ -4,6 +4,12 @@ import ExpanseSubmitDetails from './ExpanseSubmitDetails';
 import { useDispatch } from 'react-redux';
 import { authAction } from '../Store/auth';
 
+
+import ApexChart from 'react-apexcharts';
+// import moment from 'moment';
+
+
+
 const StartingPageContent = () => {
    const dispatch=useDispatch()
   const [title, setTitle] = useState('');
@@ -121,6 +127,13 @@ const StartingPageContent = () => {
   if(sum){
     dispatch(authAction.ispremium(sum))
   }
+
+  const categories = Array.from(new Set(submittedData.map((expense) => expense.category)));
+  const categoryAmounts = categories.map((category) =>
+    submittedData.reduce((total, expense) => (expense.category === category ? total + expense.amount : total), 0)
+  );
+
+ 
   return (
     <>
     <div className="container">
@@ -149,19 +162,46 @@ const StartingPageContent = () => {
         </select>
       </div>
       <div className="form-actions">
-        <button type="submit" className='btnsubmit'>Submit</button>
+        <button className='btnsubmit'>Submit</button>
         <h2>Total Amount:={sum} </h2>
       </div>
     </form>
     </div>
     <div className='mains'>
-    <h2 style={{textAlign:"center",textDecoration:"underline"}}>Expense Details</h2>
-    {submittedData.map((item, index) => (
-        <ExpanseSubmitDetails key={index} expenseData={item}
-        onEdit={() => editExpense(item.id)}
-        onDelete={() => deleteExpense(item.id)}
-         />
-      ))}
+      <div>
+    {submittedData.length === 0 ? (
+          <p style={{ textAlign: "center" }}>No items added. Please add an item.</p>
+        ) : (
+          submittedData.map((item, index) => (
+            <ExpanseSubmitDetails
+              key={index}
+              expenseData={item}
+              onEdit={() => editExpense(item.id)}
+              onDelete={() => deleteExpense(item.id)}
+            />
+          ))
+        )}
+        </div>
+        <div className='main-chart'>
+        <div className="pie-chart"  style={{ width: '400px', }}>
+        <h3>Expense Categories Distribution</h3>
+        <ApexChart
+          options={{
+            chart: {
+              type: 'pie',
+            },
+            labels: categories,
+            
+          }}
+          series={categoryAmounts}
+          type="pie"
+        />
+      </div>
+      </div>
+      </div>
+     
+      <div className="total-amount">
+     <h4 style={{textAlign:"center",marginTop:"20px"}}>Total Amount: {sum}</h4>
       </div>
     </>
   );

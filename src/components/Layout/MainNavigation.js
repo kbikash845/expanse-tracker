@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link,  useNavigate } from 'react-router-dom';
 
 import classes from './MainNavigation.module.css';
 // import { useContext } from 'react';
@@ -8,6 +8,8 @@ import { authAction } from '../Store/auth';
 
 const MainNavigation = () => {
 
+
+  const navigate=useNavigate()
   const dispatch=useDispatch()
   // const authCtx=useContext(AuthContext)
  const isAuth=useSelector(state=>state.auth.isAuthentication)
@@ -17,20 +19,32 @@ const MainNavigation = () => {
 
   const longoutHandler=()=>{
   dispatch(authAction.lonout())
+  navigate("/auth")
+  
+
+  }
+
+  const expanseTrackeHandler=()=>{
+    if(!isAuth){
+      alert("loging first")
+      
+      navigate('/auth')
+    }
+    
   }
   return (
     <header className={classes.header}>
-      <Link to='/'>
-        <div className={classes.logo}>Expanse Tracker</div>
+      <Link to='/dashboard'>
+        <div className={classes.logo}  onClick={expanseTrackeHandler}>Expanse Tracker</div>
       </Link>
       <nav>
         <ul>
-          {!isAuth&& (
+          {!isAuth && (
             <li>
             <Link to='/auth'>Login</Link>
           </li>
           )}
-         {ispremium && (
+         {ispremium && isAuth && (
            <li>
            <Link to='/profile'> Premium</Link>
          </li>

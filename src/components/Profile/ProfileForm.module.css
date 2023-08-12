@@ -27,7 +27,7 @@
 }
 
 
-input[type=submit] {
+.submits {
   width: 50%;
   background-color: #4CAF50;
   color: white;
@@ -38,6 +38,6 @@ input[type=submit] {
   cursor: pointer;
 }
 
-input[type=submit]:hover {
+.submits:hover {
   background-color: #45a049;
 }

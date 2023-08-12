@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 const initialAuthState={
-    isAuthentication:false,
-    ispremium:false
+    isAuthentication:!!localStorage.getItem("token"),
+    ispremium:false,
+    
 };
 
 const authSlice=createSlice({
@@ -12,7 +13,7 @@ const authSlice=createSlice({
         state.isAuthentication=true;
         localStorage.setItem("token",action.payload)
       } ,
-      lonout(state,action){
+      lonout(state){
         state.isAuthentication=false;
         localStorage.removeItem("token")
       },
@@ -22,7 +23,7 @@ const authSlice=createSlice({
         }else{
             state.ispremium=false
         }
-    }
+    },
     }
    
 

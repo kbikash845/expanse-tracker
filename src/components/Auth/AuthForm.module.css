@@ -41,6 +41,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-size: 20px;
 }
 
 .actions button {
@@ -65,8 +66,26 @@
   border: none;
   padding: 0.15rem 1.5rem;
 }
-
+.islogin{
+  padding: 8px;
+  margin-bottom: 8px;
+  width: 120px;
+  border-radius: 6px;
+}
+.islogin:hover{
+  background-color: aqua;
+  cursor: pointer;
+  color: red;
+}
 .actions .toggle:hover {
   background-color: transparent;
   color: #ae82cc;
+}
+.forgot{
+  font-size: 18px;
+  color: antiquewhite;
+/* border: 1px solid red; */
+}
+.forgot:hover{
+  color: red;
 }
