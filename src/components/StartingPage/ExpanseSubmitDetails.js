@@ -1,11 +1,14 @@
 import React from 'react'
 import './ExpanseSubmitDetails.css'
+// import PiChart from './PiChart';
+// import { UseSelector } from 'react-redux/es/hooks/useSelector';
 
 
 function ExpanseSubmitDetails({expenseData,onDelete, onEdit}) {
 
     
     return (
+      <>
         <div className="details-container">
       {/*  */}
 
@@ -34,6 +37,9 @@ function ExpanseSubmitDetails({expenseData,onDelete, onEdit}) {
            </li>
       </ul>
     </div>
+
+  
+    </>
   );
 };
 
