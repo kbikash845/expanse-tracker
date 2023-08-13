@@ -81,3 +81,14 @@
     font-size: 18px;
     }
   }
+  .total-amount{
+    display: flex;
+    justify-content: center;
+  }
+  .btnDownload{
+    cursor: pointer;
+    padding: 8px;
+    background-color: #4CAF50;
+    background-color: #4CAF50;
+    border-radius: 4px;
+  }

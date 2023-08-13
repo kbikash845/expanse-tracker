@@ -20,6 +20,34 @@ const StartingPageContent = () => {
   const [submittedData, setSubmittedData] = useState([]);
 
    // Load submitted data from localStorage on component mount
+
+   const downloadfileHandler=()=>{
+
+    
+    const csvData = submittedData.map((expense) => {
+      return [
+        expense.amount,
+        expense.title,
+        expense.category,
+        new Date(expense.date).toLocaleDateString(),
+      ].join(",");
+    });
+
+    console.log("csvData",csvData)
+  
+    const csvHeader = "Amount,Expanse-Name,Category,Date";
+    const csvContent = csvHeader + "\n" + csvData.join("\n");
+  
+    const blob = new Blob([csvContent], { type: "text/csv" });
+    const url = URL.createObjectURL(blob);
+  
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "expenses.csv";
+    link.click();
+  
+    URL.revokeObjectURL(url);
+   }
    useEffect(() => {
     const storedData = localStorage.getItem('submittedData'); 
     if (storedData) {
@@ -159,6 +187,7 @@ const StartingPageContent = () => {
           <option value="diesel">Diesel</option>
           <option value="vegetable">vegetables</option>
           <option value="grocery">grocery</option>
+          <option value="fruits">friuts</option>
         </select>
       </div>
       <div className="form-actions">
@@ -201,7 +230,7 @@ const StartingPageContent = () => {
       </div>
      
       <div className="total-amount">
-     <h4 style={{textAlign:"center",marginTop:"20px"}}>Total Amount: {sum}</h4>
+     <button onClick={downloadfileHandler} className='btnDownload'>Download File</button>
       </div>
     </>
   );
