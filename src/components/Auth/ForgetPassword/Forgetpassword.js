@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 // import { Link } from 'react-router-dom';
 import './Forgetpassword.css'
+import { NavLink } from 'react-router-dom';
 
 function Forgetpassword() {
   const emailRef = useRef();
@@ -9,7 +10,7 @@ function Forgetpassword() {
   const forgotPasswordHandler = () => {
     setError(null); // Clear any previous error
 
-    fetch("https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyBSGMAK5un8LN-a54LKYZ5hbtSKh4l4gTc", {
+    fetch("https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyDtXdLqsAtc17unBasd0M-VjoDNZjDpFvI", {
       method: "post",
       body: JSON.stringify({
         requestType: "PASSWORD_RESET",
@@ -52,8 +53,10 @@ function Forgetpassword() {
     </div>
     {error && <p style={{color:"red",textAlign:"center"}}>{error}</p>}
     <p style={{textAlign:"center",fontWeight:"bold"}} >
+      <NavLink to='/auth'>
         Allready a User?
         <b style={{color:"red"}}  >Loging</b>
+        </NavLink>
     </p>
     </>
   );

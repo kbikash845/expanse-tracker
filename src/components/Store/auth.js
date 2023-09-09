@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 const initialAuthState={
-    isAuthentication:!!localStorage.getItem("token"),
+    isAuthentication:false,
     ispremium:false,
+    // userEmail: null,
     
 };
 
@@ -11,14 +12,16 @@ const authSlice=createSlice({
     reducers:{
       login(state,action) {
         state.isAuthentication=true;
+        // state.userEmail = action.payload.email;
         localStorage.setItem("token",action.payload)
       } ,
       lonout(state){
         state.isAuthentication=false;
+        // state.userEmail = null;
         localStorage.removeItem("token")
       },
       ispremium(state,action){
-        if(action.payload>1000){
+        if(action.payload>10000){
             state.ispremium=true
         }else{
             state.ispremium=false

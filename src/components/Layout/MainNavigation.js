@@ -19,9 +19,11 @@ const MainNavigation = () => {
 
   const longoutHandler=()=>{
   dispatch(authAction.lonout())
+  localStorage.removeItem("email")
   navigate("/auth")
   
 
+  
   }
 
   const expanseTrackeHandler=()=>{

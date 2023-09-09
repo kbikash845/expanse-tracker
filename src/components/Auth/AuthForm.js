@@ -28,6 +28,8 @@ const AuthForm = () => {
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
     const enteredConfirmPassword = confirmPasswordInputRef.current?.value;
+    localStorage.setItem("email",enteredEmail);
+
 
     setIsLogin(true);
     if (!isLogin && enteredPassword !== enteredConfirmPassword) {
@@ -37,9 +39,9 @@ const AuthForm = () => {
 
     let url;
     if (isLogin) {
-      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBSGMAK5un8LN-a54LKYZ5hbtSKh4l4gTc';
+      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDtXdLqsAtc17unBasd0M-VjoDNZjDpFvI';
     } else {
-      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBSGMAK5un8LN-a54LKYZ5hbtSKh4l4gTc';
+      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDtXdLqsAtc17unBasd0M-VjoDNZjDpFvI';
     }
 
     setLoading(true);

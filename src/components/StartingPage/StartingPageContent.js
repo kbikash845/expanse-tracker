@@ -20,6 +20,33 @@ const StartingPageContent = () => {
   const [submittedData, setSubmittedData] = useState([]);
 
    // Load submitted data from localStorage on component mount
+   const enteredEmail=localStorage.getItem('email');
+   const updatedEmail = enteredEmail ? enteredEmail.replace('@', '').replace('.', '') : '';
+
+
+
+   const fetchExpenses = () => {
+    fetch(`https://expanse-tracker-app-59900-default-rtdb.firebaseio.com//user/${updatedEmail}.json`)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Failed to fetch expenses');
+        }
+      })
+      .then((data) => {
+        const loadedExpenses = [];
+        for (const key in data) {
+          loadedExpenses.push({ id: key, ...data[key] });
+        }
+        setSubmittedData(loadedExpenses);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
 
    const downloadfileHandler=()=>{
 
@@ -49,16 +76,13 @@ const StartingPageContent = () => {
     URL.revokeObjectURL(url);
    }
    useEffect(() => {
-    const storedData = localStorage.getItem('submittedData'); 
-    if (storedData) {
-      setSubmittedData(JSON.parse(storedData));
+    const token = localStorage.getItem("token");
+    console.log(token)
+    if (token) {
+      dispatch(authAction.login(token));
     }
+    fetchExpenses();
   }, []);
-
-  // Save submitted data to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem('submittedData', JSON.stringify(submittedData));
-  }, [submittedData]);
 
 
   const submitHandler = async(event) => {
@@ -72,7 +96,7 @@ const StartingPageContent = () => {
     };
 
     try{
-      const Response=await fetch("https://expanse-tracker-app-f33f0-default-rtdb.firebaseio.com/expanse.json",
+      const Response=await fetch(`https://expanse-tracker-app-59900-default-rtdb.firebaseio.com/user/${updatedEmail}.json`,
       {
        method:"post",
        body:JSON.stringify(expenseData),
@@ -103,7 +127,7 @@ const StartingPageContent = () => {
 
 
   const deleteExpense = (id) => {
-    fetch(`https://expanse-tracker-app-f33f0-default-rtdb.firebaseio.com/expense/${id}.json`, {
+    fetch(`https://expanse-tracker-app-59900-default-rtdb.firebaseio.com/user/${updatedEmail}/${id}.json`, {
       method: 'DELETE',
     })
       .then((response) => {
@@ -132,7 +156,7 @@ const StartingPageContent = () => {
         setDate(editItem.date);
         setCategory(editItem.category)
     }
-    fetch(`https://expanse-tracker-app-f33f0-default-rtdb.firebaseio.com/expense/${id}.json`, {
+    fetch(`https://expanse-tracker-app-59900-default-rtdb.firebaseio.com/user/${updatedEmail}/${id}.json`, {
         method: 'DELETE',
       }).then((response) => {
         if (response.ok) {
