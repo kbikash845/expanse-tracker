@@ -8,6 +8,7 @@ import StartingPageContent from './components/StartingPage/StartingPageContent';
 import HomePage from './pages/HomePage';
 import Forgetpassword from './components/Auth/ForgetPassword/Forgetpassword';
 import { useSelector } from 'react-redux';
+// import Dashboard from './components/Dashboard';
 
 
  
@@ -24,6 +25,7 @@ function App() {
       <Route path='/profile' element={<ProfileForm/>}/>
       <Route path='/forgotpassword' element={<Forgetpassword/>}/>
     {isAuth && <Route path='/dashboard' element={<StartingPageContent/>}/>}
+    {/* <Route path='/dash' element={<Dashboard/>}/> */}
 
     </Routes>
   </div>

@@ -61,7 +61,9 @@ const MainNavigation = () => {
              <button onClick={longoutHandler}>Logout</button>
            </li>
           )}
-         
+         <li>
+          {/* <Link to="/dash">Dashboard</Link> */}
+         </li>
         </ul>
       </nav>
     </header>

@@ -26,7 +26,7 @@ const StartingPageContent = () => {
 
 
    const fetchExpenses = () => {
-    fetch(`https://expanse-tracker-app-59900-default-rtdb.firebaseio.com//user/${updatedEmail}.json`)
+    fetch(`https://expanse-tracker-6f0a9-default-rtdb.firebaseio.com//user/${updatedEmail}.json`)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -96,7 +96,7 @@ const StartingPageContent = () => {
     };
 
     try{
-      const Response=await fetch(`https://expanse-tracker-app-59900-default-rtdb.firebaseio.com/user/${updatedEmail}.json`,
+      const Response=await fetch(`https://expanse-tracker-6f0a9-default-rtdb.firebaseio.com/user/${updatedEmail}.json`,
       {
        method:"post",
        body:JSON.stringify(expenseData),
@@ -127,7 +127,7 @@ const StartingPageContent = () => {
 
 
   const deleteExpense = (id) => {
-    fetch(`https://expanse-tracker-app-59900-default-rtdb.firebaseio.com/user/${updatedEmail}/${id}.json`, {
+    fetch(`https://expanse-tracker-6f0a9-default-rtdb.firebaseio.com/user/${updatedEmail}/${id}.json`, {
       method: 'DELETE',
     })
       .then((response) => {
@@ -156,7 +156,7 @@ const StartingPageContent = () => {
         setDate(editItem.date);
         setCategory(editItem.category)
     }
-    fetch(`https://expanse-tracker-app-59900-default-rtdb.firebaseio.com/user/${updatedEmail}/${id}.json`, {
+    fetch(`https://expanse-tracker-6f0a9-default-rtdb.firebaseio.com/user/${updatedEmail}/${id}.json`, {
         method: 'DELETE',
       }).then((response) => {
         if (response.ok) {
